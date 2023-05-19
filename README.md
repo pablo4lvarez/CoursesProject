@@ -1,4 +1,9 @@
 # README
+Project for the course Ingeniería de Software (IIC2143) for my university.
+This project is completely done with Ruby on Rails.
+
+---
+## Original README:
 
 Link Heroku: https://cursos-online21.herokuapp.com/
 
