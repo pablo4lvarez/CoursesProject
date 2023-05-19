@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Forums</h1>
+
+<div class="columns">
+  <% @forums.each do |forum| %>
+    <div class="column">
+      <div class="box">
+        <p class="title"><%= forum.name %></p><hr>
+        <%= link_to 'Open forum', new_course_forum_message_path(:course_id => forum.course_id, :forum_id => forum.id), class:"button is-fullwith" %><br>
+        <%if current_user.id == @course.instructor%>
+          <%= link_to 'Edit forum', edit_course_forum_path(forum.course_id, forum.id), class:"button is-fullwith" %><br>
+          <%= link_to 'Delete forum', course_forum_path(forum.course_id, forum.id), method: :delete, data: { confirm: "Are you sure?" }, class:"button is-fullwith" %><br>
+        <% end %> 
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<br>
+<%if current_user.id == @course.instructor%>
+  <%= link_to 'Add forum', new_course_forum_path(@course.id) %><br>
+<% end %> 
+<%= link_to 'Go back', course_path(:id => params[:course_id]) %><br>
+

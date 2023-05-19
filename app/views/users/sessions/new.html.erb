@@ -1,0 +1,30 @@
+<div class=mt-4>
+  <p class="title">Log in</p>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email, class:"label" %>
+    <div class="control">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, class:"label"%>
+    <div class="control">
+      <%= f.password_field :password, autocomplete: "current-password", class:"input" %>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me, type:"checkbox" %>  <%= f.label :remember_me, class:"checkbox" %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in", class:"button is-rounded is-dark is-rounded is-dark" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links"%>

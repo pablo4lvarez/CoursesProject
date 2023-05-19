@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Calificacion:</strong>
+  <%= @resena.calificacion %>
+</p>
+
+<p>
+  <strong>Contenido:</strong>
+  <%= @resena.contenido %>
+</p>
+
+<%= link_to 'Go Back', resenas_path(:course_id => @resena.course_id) %> |
+<%= link_to 'Edit review', edit_resena_path(@resena) %> |
+<%= link_to 'Delete review', resenas_delete_path(:id => @resena.id), method: :delete %><br>

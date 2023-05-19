@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="title my-3">Messages</h1>
+
+
+
+ 
+<% @messages.each do |message| %>
+<div class="box">
+    <p><small><%= "#{message.user.name} #{message.user.last_name}" if message.user.id != @course.instructor %></small>
+    <small class=has-text-primary><%= "#{message.user.name} #{message.user.last_name} (Teacher)" if message.user.id == @course.instructor %></small><br>
+    <strong><%= message.contenido %></strong><hr>
+    <small><%= message.created_at %></small></p>
+    <%if current_user == message.user%></p>
+        <td><%= link_to 'Delete', course_forum_message_path(:id => message.id), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
+</div>
+<% end %>
+
+
+<%= form_with(model: @message, method: :post, url: course_forum_messages_path(:course_id => @forum.course_id, :forum_id => @forum.id)) do |form| %>        
+    <div>
+        <%= form.text_area :contenido, class:"textarea", placeholder:"type a message" %>
+    </div>
+    <div class>
+        <%= form.text_field :forum_id, value: @forum.id, hidden: true %>
+    </div>
+    <div>
+        <%= form.text_field :user_id, value: current_user.id, hidden: true %>
+    </div>
+    <div>
+        <%= form.submit 'Post message', class:"button is-success my-2" %>
+    </div>
+<% end %>
+<%= link_to 'Go Back', course_forums_path(:course_id => @forum.course_id), class:"button is-fullwith my-2" %><br>
+
+<br>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Proyecto</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+
+  <body>
+    <section class="hero is-light">
+      <div class="hero-body">
+        <p class="title">DCCoursera</p>
+      </div>
+    
+      <% if current_user %>
+        <div class="hero-foot">
+          <div class="tabs is-centered">
+            <ul>
+              <li>
+                <%= link_to "Home", home_path, class:"has-text-link" %>
+              </li>
+              <li>
+                  <%= link_to "Profile", users_show_path(current_user.id) %>
+              </li>
+              <li>
+                <%= link_to "My courses", courses_path %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+    </section>
+    <div class="block">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+    <p class="alert"><%= alert %></p>
+    <div class="block", align="center">  
+      <% if current_user %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%if request.path == "/"%>
+          <%= link_to "Sign in", new_user_session_path, class:"button is-rounded is-dark is-dark"%>
+          <%= link_to "Sign up", new_user_registration_path, class:"button is-rounded is-dark is-dark"%>
+        <%end%>
+      <% end %>
+    </div>
+
+    <footer class="footer is-black">
+      <div class="content has-text-centered">
+        <p>
+          <strong>DCcoursera</strong> by <a href="https://www.instagram.com/koksalbaba/">Nadie</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

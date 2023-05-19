@@ -1,0 +1,32 @@
+<%= notice %>
+<%if current_user%>
+    <div class="mt-6">
+        <div class="columns">
+            <% current_user.courses.each do |course| %>
+                <div class="column">
+                    <div class="box">
+                        <div>
+                            <p class="title"><%= course.name%></p>
+                            <%if course.instructor == current_user.id%>
+                                <p class="is-size-5"><strong> You teach this course </strong></p>
+                            <%else%>
+                                <p class="is-size-5"><strong> (Free) </strong></p>
+                            <%end%>   
+                            <hr>
+                        </div>
+                        <p class="is-size-5"><strong><%= course.category %></strong></p>
+                        <p class="my-3"><%= course.description %></p>
+                        <p class="is-size-7">
+                            <%= link_to 'View details', course_path(course)%>
+                        </p>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="m-5" align="center">
+        <%= link_to 'Upload a new course', new_course_path, class:"button is-rounded is-dark is-dark" %>
+    </div>
+
+<%end%>

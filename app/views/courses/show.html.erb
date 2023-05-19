@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<div class="my-4">
+<h1 class="title"><%= @course.name%></h1>
+</div>
+<p>
+
+<p class="title is-6"><%= @course.category %></p>
+
+<div class="block"><%= @course.description %></div>
+
+<p class="title is-6"> Rating: <%= @course.average_rating(@course.id) %></p>
+
+<div class="box">
+    <p class="title">Lessons</p>
+    <div class="columns">
+        <% @course.clases.each do |clase| %>
+            <div class="column">    
+                <div class="box">
+                    <p class="title">Class <%= clase.numero %> - <%= clase.nombre %></p><hr>
+                    <%if current_user.courses.include? @course%>
+                        <p><%= clase.contenido %></p><br>
+                        <p><%= link_to 'View details', course_clase_path(@course, clase) %></p>                    
+                    <%end%>              
+                </div>  
+            </div>             
+        <% end %>
+    </div>
+</div>
+
+
+<div class="buttons has-addons">
+    <%= link_to 'Reviews', course_resenas_path(:course_id => @course.id), class:"button is-fullwith" %><br>
+    <%if @course.instructor != current_user.id%>
+        <%if current_user.courses.include? @course%>
+            <%= link_to 'Forums', course_forums_path(:course_id => @course.id), class:"button is-fullwith" %><br>
+        <%end%>
+    <%else%>
+        <%= link_to 'Forums', course_forums_path(:course_id => @course.id), class:"button is-fullwith" %><br>
+        <%= link_to 'Add new class', new_course_clase_path(@course.id), class:"button is-fullwith" %><br>
+        <%= link_to 'Edit course', edit_course_path(@course), class:"button is-fullwith" %><br>
+    <%end%>
+    <%= link_to 'Go back', courses_path, class:"button is-fullwith" %><br>
+</div>
+<div align='right'>
+    <%if @course.instructor != current_user.id%>
+        <%if current_user.courses.include? @course%>
+            <%= link_to 'Unsubscribe course', course_unsubscribe_path(@course.id), method: :get, class:"button is-rounded is-dark is-dark" %><br><br>
+        <%else%>
+            <%= link_to 'Sign up for this course', course_signup_path(@course.id), method: :get, class:"button is-rounded is-dark is-dark" %><br><br>
+        <%end%>
+    <%else%>
+        <%= link_to 'Delete course', course_path, method: :delete, data: { confirm: "Are you sure?" }, class:"button is-rounded is-danger" %><br>
+    <%end%>
+</div>

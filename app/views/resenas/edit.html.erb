@@ -1,0 +1,17 @@
+<h1 class="title mt-2">Editing Review</h1>
+
+<p id="notice"><%= notice %></p>
+<%= form_with(model: @resena, method: :patch, url: course_resena_path(:course_id => @resena.course_id, :id => @resena.id)) do |form| %>
+
+    <div>
+        <%= form.label :Score, class:"label"%>
+        <%= form.text_field :calificacion, class:"input" %>
+    </div>
+    <div>
+        <%= form.label :Description, class:"label mt-3" %>
+        <%= form.text_field :contenido, class:"input" %>
+    </div>
+    <div>
+        <%= form.submit 'Edit review', class:"button mt-2" %>
+    </div>
+<% end %>

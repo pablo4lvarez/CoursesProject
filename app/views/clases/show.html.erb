@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<div class="my-4">
+<h1 class="title"><%= @clase.numero %>.</h1><hr>
+</div>
+<p>
+
+<p class="title is-6"><%= @clase.nombre %></p>
+
+
+
+<% 
+require 'youtube_embed'
+# https://github.com/shir/youtube-embed/
+%>
+
+<div class="block"><%= get_video_iframe(@clase.contenido)%></div>
+
+
+
+
+<br>
+<div class="buttons has-addons">
+    <%if @course.instructor == current_user.id%>
+        <%= link_to 'Edit class', edit_course_clase_path(@clase.course_id, @clase), class:"button is-fullwith" %><br>
+    <%end%>
+    <%= link_to 'Go back', course_path(:id => @clase.course_id), class:"button is-fullwith" %><br>
+    <%if @course.instructor == current_user.id%>
+        <%= link_to 'Delete class', course_clase_path(@clase.course_id, @clase.id), method: :delete, data: { confirm: "Are you sure?" }, class:"button is-fullwith is-danger" %><br>
+    <%end%>
+</div>

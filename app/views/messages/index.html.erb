@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Messages</h1>
+
+<table>
+
+    <tbody>
+        <% @messages.each do |message| %>
+        <tr>
+            <td><%= message.nombre %></td>
+            <td><%= message.contenido %></td>
+            <td><%= link_to 'Show', message%></td>
+            <td><%= link_to 'Edit', edit_message_path(forum) %></td>
+            <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= form_with(model: @message, local: true, url: new_course_forum_message_path, method: "post") do |form| %>
+    <div>
+        <%= form.text_field :contenido %>
+    </div>
+        <div class>
+            <%= form.text_field :forum_id, value: @forum.id, class:"input", hidden: true %>
+        </div>
+        <div>
+            <%= form.text_field :user_id, value: current_user.id, class:"input", hidden: true %>
+        </div>
+        <div>
+            <%= form.submit 'Post message', class:"button is-success" %>
+        </div>
+<% end %>
+<%= link_to 'Go Back', course_forums_path(:course_id => @forum.course_id), class:"button is-success" %><br>
+
+<br>
+

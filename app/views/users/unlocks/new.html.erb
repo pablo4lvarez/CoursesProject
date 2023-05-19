@@ -1,0 +1,20 @@
+<div class="mt-4">
+  <h2 class="Title">Resend unlock instructions</h2>
+</div>
+
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email, class:"label"%>
+    <div class="control">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input"%>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Resend unlock instructions" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>

@@ -1,0 +1,19 @@
+<div class="my-2" style="height:200px;width:200px;height:200px;padding:5px;border:thin solid black;">    
+    <%= image_tag(@user.image) if @user.image.attached?%>
+</div>
+
+<h1 class="title is-4">
+    <%= @user.name + " " + @user.last_name %>
+</h1>
+
+<p>
+    <strong>Email: </strong>
+    <%= @user.email %>
+</p>
+
+<div class="buttons has-addons mt-3">
+    <%if current_user == @user%>
+        <%= link_to "Edit profile", edit_user_registration_path, class:"button"%>
+    <%end%>
+    <%= link_to "Go back   ", courses_path, class:"button" %>
+</div>

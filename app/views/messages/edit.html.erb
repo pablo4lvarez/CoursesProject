@@ -1,0 +1,15 @@
+<h1>Messages#edit</h1>
+
+
+
+
+<%= form_with(model: @message, method: :patch, url: messages_update_path(:id => @message.id)) do |form| %>
+
+    <div>
+        <%= form.label :Contenido %>
+        <%= form.text_field :contenido %>
+    </div>
+    <div>
+        <%= form.submit 'Edit message' %>
+    </div>
+<% end %>

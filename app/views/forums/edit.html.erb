@@ -1,0 +1,15 @@
+<h1>Editing Forum</h1>
+
+<p id="notice"><%= notice %></p>
+
+
+<%= form_with(model: @forum, method: :patch, url: course_forum_path(:course_id => @forum.course_id, :id => @forum.id)) do |form| %>
+
+    <div>
+        <%= form.label :Name %>
+        <%= form.text_field :name %>
+    </div>
+    <div>
+        <%= form.submit 'Edit forum' %>
+    </div>
+<% end %>

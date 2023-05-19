@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="title mt-2">Reviews</h1>
+
+
+
+
+<div class="columns">
+  <% @resenas.each do |resena| %>
+    <div class="column">
+      <div class="box">
+        <p class="title"> <%= resena.user.name + " " + resena.user.last_name %>
+        <p class="title">Score: <%= resena.calificacion %></p><hr>
+        <p class="my-2"><%= resena.contenido %></p><br>
+        <%if current_user == resena.user%>
+          <%= link_to 'Edit review', edit_course_resena_path(resena.course_id, resena.id), class:"button is-fullwith" %>
+          <%= link_to 'Delete review', course_resena_path(resena.course_id, resena.id), method: :delete, data: { confirm: "Are you sure?" }, class:"button is-fullwith" %><br>
+        <% end %>
+        </div>
+    </div>
+  <% end %>
+</div>
+
+<br>
+<div class="buttons has-addons">
+  <%if current_user.id != @course.instructor%>
+    <%if current_user.courses.include? @course%> 
+      <%= link_to 'Add review', new_course_resena_path(:course_id => @course.id), class:"button is-fullwith" %><br>
+    <% end %>  
+  <% end %>
+  <%= link_to 'Go back', course_path(:id => params[:course_id]), class:"button is-fullwith" %><br>
+</div>
+

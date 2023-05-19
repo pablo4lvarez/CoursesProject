@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<div class="my-4">
+<h1 class="title"><%= @forum.name%></h1>
+</div>
+<p>
+
+
+<%= form_with(model: @message, local: true, url: new_course_forum_message_path, method: "post") do |form| %>
+    <div>
+        <%= form.label :Contenido %>
+        <%= form.text_field :contenido %>
+    </div>
+    <div class="field has-adons">
+        <div class ="control">
+            <%= form.text_field :forum_id, value: @forum.id, class:"input", hidden: true %>
+        </div>
+        <div class="control">
+            <%= form.text_field :user_id, value: current_user.id, class:"input", hidden: true %>
+        </div>
+        <div class="control">
+            <%= form.submit 'Post message', class:"button is-success" %>
+        </div>
+    </div>
+<% end %>
+<%= link_to 'Go Back', course_forums_path(:course_id => @forum.course_id), class:"button is-success" %><br>
+

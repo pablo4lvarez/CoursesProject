@@ -1,0 +1,39 @@
+<%= notice %>
+<%if current_user%>
+    <p class="label my-2">Search course by name or description:</p>
+    <form action="<%= home_path %>">
+    <div  class="field has-addons">
+        <div class="control">
+            <input type="text" name="search_key" class="input" placeholder="Find a course">
+        </div>
+        <div class="control">        
+            <button type="submit"Search class="button is-info" >search</button>
+        </div>
+    </form>
+    </div>
+    <div class="mt-6">
+        <div class="columns">
+            <% @courses.each do |course| %>
+                <div class="column">
+                    <div class="box">
+                        <div>
+                            <p class="title"><%= course.name%></p>
+                            <%if course.instructor == current_user.id%>
+                                <p class="is-size-5"><strong> You teach this course </strong></p>
+                            <%else%>
+                                <p class="is-size-5"><strong> (Free) </strong></p>
+                            <%end%>   
+                            <hr>
+                        </div>  
+                        <p class="is-size-5"><strong><%= course.category %></strong></p>
+                        <p class="my-3"><%= course.description %></p>
+                        <p class="is-size-7">
+                            <%= link_to 'View details', course_path(course)%>
+                        </p>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+
+<%end%>

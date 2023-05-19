@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+    <strong>Contenido:</strong>
+    <%= @message.contenido %>
+</p>
+
+<%= link_to 'Edit message', edit_message_path(@forum) %> |
+<%= link_to 'Go Back', message_path %>
+<%= link_to 'Delete message', message_delete_path(:id => @message.id), method: :delete %><br>

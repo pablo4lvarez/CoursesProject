@@ -1,0 +1,37 @@
+<%= notice %>
+
+<div class="my-4">
+    <h1 class="title">Edit your course</h1>
+</div>
+
+<%= form_with(model: @course, method: :patch, url: course_path(:id => @course.id)) do |form| %>
+
+    <div>
+        <%= form.label :Name, class:"label" %>
+        <div class="control">
+            <%= form.text_field :name, class:"input" %>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <%= form.label :Description, class:"label" %>
+        <div class="control">
+            <%= form.text_area :description, class:"textarea", placeholder:"10 lines of textarea", rows:"10"%>
+        </div>
+    </div>
+
+    <div>
+        <%= form.label :Category, class:"label" %>
+        <div class="control">
+            <%= form.text_field :category, class:"input" %>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <%= form.submit 'Edit courses', class:"button is-rounded is-dark is-rounded is-dark" %>
+    </div>
+
+<% end %>
+<div class="mt-3">
+    <%= link_to 'Go back', course_path(@course) %>
+</div>
